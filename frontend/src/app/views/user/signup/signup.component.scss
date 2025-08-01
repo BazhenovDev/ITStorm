@@ -1,0 +1,14 @@
+@import "../../../../assets/styles/shared/auth-form";
+
+.signup {
+  padding: 123px 0 120px 0;
+  .container {
+    display: flex;
+    align-items: flex-start;
+    .auth {
+      &-form {
+        margin-right: 185px;
+      }
+    }
+  }
+}

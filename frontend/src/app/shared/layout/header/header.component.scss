@@ -1,0 +1,77 @@
+@import "../../../../assets/styles/shared/variables";
+
+.header {
+  padding: 40px 0;
+
+  .container {
+      display: flex;
+      align-items: center;
+  }
+
+  &-logo {
+    margin-right: 100px;
+  }
+
+  &-navigate {
+    width: 600px;
+    margin-right: 86px;
+    &-items {
+      column-gap: 30px;
+    }
+    &-item {
+      &-link {
+        position: relative;
+        font-weight: 500;
+        &::before {
+          position: absolute;
+          bottom: -3px;
+          content: "";
+          width: 0;
+          height: 2px;
+          background-color: $main-text-color;
+          transition: all .35s ease;
+        }
+        &:hover {
+          &::before {
+            width: 100%;
+          }
+        }
+        &.active {
+          color: $main-link-active-color;
+          &::before {
+            background-color: $main-link-active-color;
+          }
+        }
+      }
+    }
+  }
+
+  &-contacts {
+    margin-right: 20px;
+    &-phone {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      color: $main-title-color;
+      font-style: normal;
+    }
+  }
+
+  &-user {
+    width: 205px;
+    &-link {
+      display: flex;
+      align-items: center;
+      justify-self: end;
+    }
+    &-icon {
+      margin-right: 7px;
+    }
+    &-text {
+      font-family: "Montserrat", sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: $main-text-color;
+    }
+  }
+}

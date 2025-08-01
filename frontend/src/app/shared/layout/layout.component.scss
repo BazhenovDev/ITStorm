@@ -1,0 +1,12 @@
+// Стили, для того, чтобы footer-component прижать к низу, а основной контент сделать по центру
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  .content {
+    flex: 1 0 auto;
+  }
+  footer-component {
+    flex: 0 0 auto;
+  }
+}

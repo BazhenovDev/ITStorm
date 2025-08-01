@@ -1,0 +1,70 @@
+@import "variables";
+@import "../mixins/mixins";
+
+.auth {
+
+  &-form {
+    &-title {
+      @include title-lora-36;
+      color: $main-title-color;
+      margin-bottom: 40px;
+    }
+
+    &-checkbox {
+      display: flex;
+      column-gap: 10px;
+      margin-bottom: 40px;
+      align-items: baseline;
+
+      .checkbox {
+        position: relative;
+        top: 1px;
+      }
+
+      & label a {
+        text-decoration: underline;
+        color: $main-link-active-color;
+      }
+
+      & label, .checkbox {
+        cursor: pointer;
+      }
+    }
+
+    &-inputs {
+      max-width: 422px;
+      margin-bottom: 10px;
+    }
+
+    &-input {
+      margin-bottom: 5px;
+    }
+
+    &-actions {
+      max-width: 422px;
+      margin-bottom: 10px;
+    }
+
+    &-button {
+      width: 100%;
+    }
+
+    &-link a {
+      color: $main-link-active-color;
+    }
+
+    &-privacy {
+      max-width: 398px;
+      line-height: 130%;
+    }
+  }
+
+  &-picture {
+    img {
+      max-width: 607px;
+      max-height: 390px;
+      object-fit: contain;
+    }
+  }
+
+}

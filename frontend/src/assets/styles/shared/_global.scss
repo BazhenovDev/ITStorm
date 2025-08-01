@@ -1,0 +1,106 @@
+@import "variables";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Максимальную высоту задаю, чтобы в layout component прижать footer к низу
+html, body {
+  height: 100%;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: $main-text-color;
+  background-color: $main-bg-color;
+}
+
+address {
+  font-style: normal;
+}
+
+.input {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  background-color: transparent;
+  border: 1px solid #709FDC;
+  border-radius: 3px;
+  padding: 18px 20px;
+  width: 100%;
+  color: $main-text-color;
+  font-size: 14px;
+  &::placeholder {
+    color: $placeholder-color;
+  }
+}
+
+.checkbox {
+  border: 1px solid #071739;
+  &:checked {
+    accent-color: $main-btn-color;
+  }
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.button {
+  background-color: $main-btn-color;
+  color: $second-title-color;
+  border: 0;
+  padding: 15px 33px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  &-small {
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  &:hover {
+    background-color: $hover-btn-color;
+  }
+}
+
+// Стили для логотипа в шапке и подвале сайта
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 85px;
+  color: $main-title-color;
+  &-text {
+    font-family: "Jost", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    span {
+      font-weight: 500;
+    }
+  }
+}
+
+//Основные стили для навигации в шапке и подвале сайта
+.navigate {
+  &-items {
+    display: flex;
+  }
+  &-item {
+    &-link {
+      font-family: "Montserrat", sans-serif;
+      font-size: 16px;
+      color: $main-text-color;
+    }
+  }
+}

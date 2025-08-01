@@ -1,0 +1,35 @@
+<section class="signup">
+  <div class="container">
+    <section class="auth-form">
+      <h1 class="auth-form-title">Регистрация на сайте</h1>
+      <div class="auth-form-inputs">
+        <div class="auth-form-input">
+          <input type="text" class="input" placeholder="Ваше имя">
+        </div>
+
+        <div class="auth-form-input">
+          <input type="text" class="input" placeholder="Электронная почта">
+        </div>
+
+        <div class="auth-form-input">
+          <input type="password" class="input" placeholder="Пароль">
+        </div>
+      </div>
+      <div class="auth-form-checkbox">
+        <input type="checkbox" class="checkbox" id="confirm">
+        <label for="confirm" class="auth-form-privacy">Я принимаю <a routerLink="/privacy" target="_blank">условия пользовательского соглашения</a>
+        и даю <a routerLink="/privacy" fragment="personal-data" target="_blank">согласие на обработку персональных данных</a>.
+        </label>
+      </div>
+      <div class="auth-form-actions">
+        <button class="button auth-form-button">Войти</button>
+      </div>
+      <div class="auth-form-link">
+        Уже есть аккаунт? <a routerLink="/login">Войдите</a>
+      </div>
+    </section>
+    <figure class="auth-picture">
+      <img src="assets/images/auth/signup.png" alt="Signup image">
+    </figure>
+  </div>
+</section>
