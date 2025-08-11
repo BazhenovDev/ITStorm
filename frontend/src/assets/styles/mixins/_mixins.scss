@@ -3,3 +3,9 @@
   font-size: 36px;
   font-weight: 400;
 }
+
+@mixin title-lora-50 {
+  font-family: "Lora", sans-serif;
+  font-size: 50px;
+  font-weight: 400;
+}

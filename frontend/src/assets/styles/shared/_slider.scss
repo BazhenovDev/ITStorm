@@ -1,0 +1,63 @@
+@import "variables";
+@import "../mixins/mixins";
+
+.slider {
+  margin-bottom: 120px;
+  position: relative;
+  &-wrapper {
+    position: relative;
+  }
+  &-actions {
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    top: calc(50% - 14px);
+    &-prev {
+      left: 10px;
+    }
+    &-next {
+      right: 10px;
+    }
+  }
+  &-action {
+    cursor: pointer;
+    position: absolute;
+    background-color: transparent;
+    border: none;
+  }
+  &-content {
+    position: absolute;
+    left: 80px;
+    top: 100px;
+  }
+  &-pretitle {
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: $main-title-color;
+  }
+  &-title {
+    @include title-lora-50();
+    line-height: 130%;
+    color: $second-title-color;
+    max-width: 570px;
+    margin-bottom: 40px;
+    &.mb20 {
+      margin-bottom: 20px;
+    }
+    span {
+      color: $main-title-color;
+    }
+  }
+  &-description {
+    font-size: 24px;
+    line-height: 130%;
+    color: #FFFFFF;
+    margin-bottom: 50px;
+    max-width: 456px;
+  }
+  &-button {
+    display: inline-block;
+  }
+}
