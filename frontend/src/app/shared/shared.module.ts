@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import {RouterModule} from "@angular/router";
 import { OwlCarouselComponent } from './owl-carousel/owl-carousel.component';
 import {CarouselModule} from "ngx-owl-carousel-o";
+import { CustomSliderComponent } from './custom-slider/custom-slider.component';
 
 
 
 @NgModule({
   declarations: [
-
-    OwlCarouselComponent
+    OwlCarouselComponent,
+    CustomSliderComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +18,8 @@ import {CarouselModule} from "ngx-owl-carousel-o";
     RouterModule
   ],
   exports: [
-    OwlCarouselComponent
+    OwlCarouselComponent,
+    CustomSliderComponent
   ]
 })
 export class SharedModule { }
