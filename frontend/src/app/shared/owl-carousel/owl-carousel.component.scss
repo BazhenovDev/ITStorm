@@ -1,8 +1,7 @@
-@import "variables";
-@import "../mixins/mixins";
+@import "../../../assets/styles/shared/variables";
+@import "../../../assets/styles/mixins/mixins";
 
 .slider {
-  margin-bottom: 120px;
   position: relative;
   &-wrapper {
     position: relative;
