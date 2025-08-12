@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SliderType} from "../../../types/slider.type";
 import {SliderService} from "../../shared/services/slider.service";
+import {flush} from "@angular/core/testing";
 
 @Component({
   selector: 'main-component',
@@ -10,6 +11,8 @@ import {SliderService} from "../../shared/services/slider.service";
 export class MainComponent implements OnInit {
 
   sliders: SliderType[] = [];
+
+  showCustomSlider: boolean = true;
 
   constructor(private sliderService: SliderService) { }
 

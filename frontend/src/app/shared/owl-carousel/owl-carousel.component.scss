@@ -42,11 +42,11 @@
     color: $second-title-color;
     max-width: 570px;
     margin-bottom: 40px;
+    ::ng-deep span {
+      color: $main-title-color;
+    }
     &.mb20 {
       margin-bottom: 20px;
-    }
-    span {
-      color: $main-title-color;
     }
   }
   &-description {
@@ -58,5 +58,12 @@
   }
   &-button {
     display: inline-block;
+  }
+}
+
+.owl {
+  &-dots {
+    position: absolute;
+    bottom: 20px;
   }
 }

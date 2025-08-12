@@ -29,46 +29,18 @@
     </button>
   </div>
   <owl-carousel-o [options]="customOptions" #owlCar>
-    <ng-template carouselSlide>
+    <ng-template carouselSlide *ngFor="let slider of sliders">
       <figure class="slider-wrapper">
         <figcaption class="slider-content">
-          <h2 class="slider-pretitle">Предложение месяца</h2>
-          <h2 class="slider-title">
-            Продвижение в Instagram для вашего бизнеса <span>-15%</span>!
+          <h2 class="slider-pretitle">{{slider.pretitle}}</h2>
+          <h2 class="slider-title" [class.mb20]="slider.description" [innerHTML]="slider.title">
           </h2>
+          <p class="slider-description"  *ngIf="slider.description">{{slider.description}}</p>
           <a href="#" class="slider-button button">Подробнее</a>
         </figcaption>
-        <img class="slider-image" src="assets/images/slider/slider1.png" alt="Slider image">
+        <img class="slider-image" src="assets/images/slider/{{slider.image}}" alt="Slider image">
       </figure>
     </ng-template>
-    <ng-template carouselSlide>
-      <figure class="slider-wrapper">
-        <figcaption class="slider-content">
-          <p class="slider-pretitle">Акция</p>
-          <h2 class="slider-title mb20">
-            Нужен грамотный <span>копирайтер</span>?
-          </h2>
-          <h2 class="slider-description">
-            Весь декабрь у нас действует акция на работу копирайтера.
-          </h2>
-          <a href="#" class="slider-button button">Подробнее</a>
-        </figcaption>
-        <img class="slider-image" src="assets/images/slider/slider2.png" alt="Slider image">
-      </figure>
-    </ng-template>
-    <ng-template carouselSlide>
-      <figure class="slider-wrapper">
-        <figcaption class="slider-content">
-          <h2 class="slider-pretitle">Новость дня</h2>
-          <h2 class="slider-title mb20">
-            <span>6 место</span> в ТОП-10
-            SMM-агенств Москвы!
-          </h2>
-          <p class="slider-description">Мы благодарим каждого, кто голосовал за нас!</p>
-          <a href="#" class="slider-button button">Подробнее</a>
-        </figcaption>
-        <img class="slider-image" src="assets/images/slider/slider3.png" alt="Slider image">
-      </figure>
-    </ng-template>
+
   </owl-carousel-o>
 </div>

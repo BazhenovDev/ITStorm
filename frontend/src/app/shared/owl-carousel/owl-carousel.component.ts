@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {OwlOptions} from "ngx-owl-carousel-o";
+import {SliderType} from "../../../types/slider.type";
 
 @Component({
   selector: 'owl-carousel-component',
@@ -7,6 +8,8 @@ import {OwlOptions} from "ngx-owl-carousel-o";
   styleUrls: ['./owl-carousel.component.scss']
 })
 export class OwlCarouselComponent implements OnInit {
+
+  @Input() sliders: SliderType[] = [];
 
   constructor() { }
 

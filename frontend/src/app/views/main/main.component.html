@@ -1,8 +1,8 @@
 <section class="main">
   <div class="container">
 
-    <owl-carousel-component></owl-carousel-component>
-    <custom-slider-component [sliders]="sliders"></custom-slider-component>
+    <owl-carousel-component *ngIf="!showCustomSlider" [sliders]="sliders"></owl-carousel-component>
+    <custom-slider-component *ngIf="showCustomSlider" [sliders]="sliders"></custom-slider-component>
 
   </div>
 </section>
