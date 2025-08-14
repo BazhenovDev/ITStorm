@@ -4,22 +4,30 @@ import {RouterModule} from "@angular/router";
 import { OwlCarouselComponent } from './owl-carousel/owl-carousel.component';
 import {CarouselModule} from "ngx-owl-carousel-o";
 import { CustomSliderComponent } from './custom-slider/custom-slider.component';
+import {HttpClientModule} from "@angular/common/http";
+import { MinLengthPipe } from './pipes/min-length.pipe';
+import {CheckRegExpPipe} from "./pipes/check-regexp.pipe";
 
 
 
 @NgModule({
   declarations: [
     OwlCarouselComponent,
-    CustomSliderComponent
+    CustomSliderComponent,
+    CheckRegExpPipe,
+    MinLengthPipe,
   ],
   imports: [
     CommonModule,
     CarouselModule,
+    HttpClientModule,
     RouterModule
   ],
   exports: [
     OwlCarouselComponent,
-    CustomSliderComponent
+    CustomSliderComponent,
+    CheckRegExpPipe,
+    MinLengthPipe
   ]
 })
 export class SharedModule { }

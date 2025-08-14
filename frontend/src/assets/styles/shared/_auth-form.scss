@@ -13,8 +13,11 @@
     &-checkbox {
       display: flex;
       column-gap: 10px;
-      margin-bottom: 40px;
       align-items: baseline;
+
+      &-wrapper {
+        margin-bottom: 40px;
+      }
 
       .checkbox {
         position: relative;
@@ -56,6 +59,27 @@
     &-privacy {
       max-width: 398px;
       line-height: 130%;
+    }
+    &-error {
+      color: red;
+      margin: 5px 0 10px;
+      li {
+        margin-left: 20px;
+        list-style-type: circle;
+      }
+    }
+    &-password {
+      position: relative;
+      input {
+        padding: 18px 35px 18px 20px;
+      }
+      &-icon {
+        position: absolute;
+        right: 10px;
+        top: calc(50% - 12px);
+        cursor: pointer;
+        fill: $main-btn-color;
+      }
     }
   }
 

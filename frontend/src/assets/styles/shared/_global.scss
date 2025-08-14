@@ -104,3 +104,20 @@ a {
     }
   }
 }
+
+// Mat Snack Bar custom
+.mat {
+  &-snack-bar-container {
+    background-color: $main-bg-color;
+  }
+  &-simple-snackbar {
+    color: $main-text-color;
+  }
+  &-button-wrapper {
+    color: $main-btn-color;
+  }
+}
+// данный стиль перебивает глобальное обнуление margin
+.mat-typography p {
+  margin: 0;
+}

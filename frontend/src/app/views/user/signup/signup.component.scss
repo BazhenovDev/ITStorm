@@ -5,9 +5,13 @@
   .container {
     display: flex;
     align-items: flex-start;
+    justify-content: space-between;
     .auth {
       &-form {
         margin-right: 185px;
+      }
+      &-picture {
+        margin-right: 26px;
       }
     }
   }
