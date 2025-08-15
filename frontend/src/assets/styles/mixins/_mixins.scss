@@ -1,6 +1,18 @@
+@mixin title-lora-26 {
+  font-family: "Lora", sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+}
+
 @mixin title-lora-36 {
   font-family: "Lora", sans-serif;
   font-size: 36px;
+  font-weight: 400;
+}
+
+@mixin title-lora-38 {
+  font-family: "Lora", sans-serif;
+  font-size: 38px;
   font-weight: 400;
 }
 
@@ -9,3 +21,23 @@
   font-size: 50px;
   font-weight: 400;
 }
+
+@mixin montserrat-16 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+@mixin title-montserrat-20-medium {
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+@mixin title-montserrat-18-semi-bold {
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+

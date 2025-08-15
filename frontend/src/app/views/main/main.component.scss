@@ -1,6 +1,280 @@
 @import "../../../assets/styles/shared/variables";
+@import "../../../assets/styles/mixins/mixins";
 
 .main {
   max-height: 100%;
-  padding-bottom: 120px;
+  margin-bottom: 120px;
 }
+
+.services {
+  margin-bottom: 120px;
+
+  &-title {
+    @include title-lora-36;
+    margin-bottom: 40px;
+    color: $main-title-color;
+  }
+
+  &-cards {
+    display: grid;
+    grid-template-rows: 498px;
+    grid-template-columns: repeat(4, 290px);
+    grid-auto-flow: row dense;
+    gap: 26px;
+  }
+}
+
+.about {
+  margin-bottom: 120px;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: self-start;
+    column-gap: 68px;
+  }
+
+  &-image {
+    max-width: 460px;
+    max-height: 453px;
+    overflow: hidden;
+    border-radius: 5px;
+
+    img {
+      max-width: 460px;
+      object-fit: contain;
+      transition: all .25s ease;
+    }
+  }
+
+  &-info {
+    max-width: 703px;
+
+    &-title {
+      @include title-lora-38;
+      color: $main-title-color;
+      margin-bottom: 20px;
+      line-height: 130%;
+    }
+
+    &-description {
+      max-width: 633px;
+      margin-bottom: 40px;
+      color: $second-text-color;
+
+      span {
+        font-weight: 500;
+      }
+    }
+
+    &-advantages {
+      &-title {
+        @include title-lora-26;
+        color: $main-title-color;
+        margin-bottom: 20px;
+        line-height: 130%;
+      }
+
+      &-items {
+        display: grid;
+        grid-template: 1fr 1fr / 1fr 1fr;
+        gap: 20px 71px;
+      }
+
+      &-item {
+        display: grid;
+        grid-template-columns: 40px 256px;
+        align-items: center;
+        column-gap: 20px;
+
+        &-circle {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background-color: $second-bg-color;
+          display: flex;
+          justify-content: center;
+
+          span {
+            font-family: 'Lora', sans-serif;
+            font-weight: 500;
+            font-size: 50px;
+            color: $main-title-color;
+            line-height: 0.5;
+            transition: all .25s ease;
+          }
+        }
+
+        &-description {
+          line-height: 130%;
+          color: $second-text-color;
+
+          span {
+            line-height: 130%;
+            font-weight: 500;
+          }
+        }
+        &:hover {
+          .about-info-advantages-item-circle span {
+            line-height: 0.3;
+          }
+        }
+      }
+    }
+  }
+
+  &:hover img {
+    transform: scale(1.02);
+  }
+}
+
+.articles {
+  margin-bottom: 120px;
+  &-title {
+    margin-bottom: 40px;
+    @include title-lora-38;
+    color: $main-title-color;
+  }
+  &-cards {
+    display: grid;
+    grid-template-rows: 571px;
+    grid-template-columns: repeat(4, 292px);
+    grid-auto-flow: row dense;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  &-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    &-link {
+      display: flex;
+      align-items: center;
+      @include title-montserrat-20-medium;
+      color: $main-title-color;
+
+      span {
+        margin-right: 14px;
+        transition: all .25s ease;
+      }
+
+      svg path {
+        transition: all .25s ease;
+      }
+
+      &:hover {
+        span,
+        svg path {
+          color: $hover-filter-color;
+          fill: $hover-filter-color;
+        }
+      }
+    }
+  }
+
+}
+
+.reviews {
+  margin-bottom: 120px;
+  &-title {
+    @include title-lora-38;
+    color: $main-title-color;
+    margin-bottom: 20px;
+  }
+  &-sliders {
+    position: relative;
+  }
+  &-slider {
+    max-width: 396px;
+    height: 267px;
+    border: 2px solid $main-border-color;
+    border-radius: 5px;
+    padding: 30px;
+    &-head {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-right: 26px;
+      }
+    }
+    &-name {
+      @include title-montserrat-18-semi-bold;
+      color: $main-title-color;
+    }
+    &-text {
+      font-size: 16px;
+      line-height: 140%;
+    }
+  }
+  &-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    z-index: 2;
+  }
+  &-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  &-prev {
+    position: absolute;
+    left: -25px;
+  }
+  &-next {
+    position: absolute;
+    right: -25px;
+  }
+}
+
+.contacts {
+  margin-bottom: 120px;
+  .container {
+    display: flex;
+    column-gap: 26px;
+  }
+  &-title {
+    @include title-lora-38;
+    color: $main-title-color;
+    margin-bottom: 20px;
+  }
+  &-item {
+    margin-bottom: 20px;
+    max-width: 500px;
+    &-title {
+      @include title-montserrat-20-medium;
+      color: $main-title-color;
+      margin-bottom: 10px;
+    }
+    &-text {
+      color: $main-text-color;
+    }
+  }
+  &-social {
+    &-items {
+      max-width: 130px;
+      display: flex;
+      justify-content: space-between;
+    }
+    &-item {
+      transition: all .3s ease;
+      path {
+        transition: all .3s ease;
+      }
+      &:hover {
+        transform: scale(1.1);
+        path {
+          fill: $hover-btn-color;
+        }
+      }
+    }
+  }
+}
+

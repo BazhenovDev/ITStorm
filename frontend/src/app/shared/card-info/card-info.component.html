@@ -1,0 +1,18 @@
+<figure class="card">
+  <span class="card-tag" *ngIf="isArticle">{{articleItem.category}}</span>
+  <div class="card-image-wrapper">
+    <img src="{{staticPath}}{{isArticle ? articleItem.image : serviceItem.image}}" alt="1" class="card-image">
+  </div>
+  <figcaption class="card-info">
+    <h3 class="card-title">{{isArticle ? articleItem.title : serviceItem.title}}</h3>
+    <p class="card-description">{{isArticle ? articleItem.description : serviceItem.description}}</p>
+  </figcaption>
+  <div class="card-actions" *ngIf="!isArticle">
+    <p class="card-price">От {{serviceItem.price}}₽</p>
+    <button class="button" data-type="{{serviceItem.type}}">Подробнее</button>
+  </div>
+  <div class="card-actions" *ngIf="isArticle">
+    <a href="" class="card-link">Читать дальше</a>
+  </div>
+</figure>
+

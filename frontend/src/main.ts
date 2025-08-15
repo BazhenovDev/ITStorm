@@ -9,4 +9,7 @@ if (environment.production) {
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)
+  .then(() => {
+    document.body.classList.remove('mat-typography');
+  })
   .catch(err => console.error(err));
