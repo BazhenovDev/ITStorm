@@ -1,0 +1,56 @@
+@import  "../../../assets/styles/shared/variables";
+@import "../../../assets/styles/mixins/mixins";
+
+.comment {
+  &-item {
+    &-head {
+      display: flex;
+      gap: 26px;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    &-name {
+      @include title-montserrat-18-semi-bold();
+      color: $main-title-color;
+      margin-bottom: 10px;
+    }
+
+    &-date {
+      font-weight: 600;
+      color: $main-filter-color;
+    }
+
+    &-text {
+      line-height: 140%;
+      margin-bottom: 39px;
+    }
+
+    &-actions {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    &-action {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      cursor: pointer;
+
+      span {
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      &.active {
+        span {
+          color: $main-btn-color;
+        }
+        path {
+          stroke: $main-btn-color;
+        }
+      }
+    }
+  }
+}

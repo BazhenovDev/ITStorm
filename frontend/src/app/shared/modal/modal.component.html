@@ -1,0 +1,68 @@
+<section class="modal" [ngClass]="{active: type}">
+  <div class="modal-wrapper">
+    <button class="modal-close">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="1.93562" y1="2.64999" x2="13.9564" y2="14.6708" stroke="#BEBEBE" stroke-linecap="round"/>
+        <line x1="13.9236" y1="2.62978" x2="1.90277" y2="14.6506" stroke="#BEBEBE" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="modal-thanks" *ngIf="type === modalThanksType">
+      <h2 class="modal-title">Спасибо за вашу заявку!</h2>
+      <p class="modal-thanks-text">Мы свяжемся с вами при первой же возможности.</p>
+      <button class="button button-small okay-button">Окей</button>
+    </div>
+    <div class="modal-consult" *ngIf="type === modalConsultType">
+      <div class="modal-consult-content">
+        <h2 class="modal-title">Закажите бесплатную консультацию!</h2>
+        <form class="modal-form" [formGroup]="consultForm">
+          <div class="input-wrapper">
+            <input type="text" class="input modal-input" placeholder="Ваше имя" formControlName="name"
+                   [style.border-color]="consultForm.get('name')?.invalid && (consultForm.get('name')?.touched || consultForm.get('name')?.dirty) ? '#ff3232' : ''">
+            <p class="input-error" *ngIf="consultForm.get('name')?.invalid && (consultForm.get('name')?.touched || consultForm.get('name')?.dirty)">Заполните ваше имя</p>
+
+          </div>
+          <div class="input-wrapper">
+            <input type="text" class="input modal-input" [mask]="'+0 (000) 000-00-00'" placeholder="Ваш номер телефона" formControlName="phone"
+                   [style.border-color]="consultForm.get('phone')?.invalid && (consultForm.get('phone')?.touched || consultForm.get('phone')?.dirty) ? '#ff3232' : ''">
+            <p class="input-error" *ngIf="consultForm.get('phone')?.invalid && (consultForm.get('phone')?.touched || consultForm.get('phone')?.dirty)">Заполните ваш номер телефона</p>
+
+          </div>
+          <button class="button button-big" [disabled]="consultForm.invalid" (click)="sendForm()">Заказать консультацию</button>
+          <p class="input-error" *ngIf="requestError">
+            Произошла ошибка при отправке формы, попробуйте еще раз.
+          </p>
+        </form>
+      </div>
+    </div>
+    <div class="modal-consult" *ngIf="type === modalOrderType">
+      <div class="modal-consult-content">
+        <h2 class="modal-title">Заявка на услугу</h2>
+        <form class="modal-form" [formGroup]="orderForm">
+          <select class="input modal-select" name="" id="" formControlName="service">
+            <option
+              *ngFor="let service of allServices"
+              value="{{service.type}}"
+            >{{ service.title }}
+            </option>
+          </select>
+          <div class="input-wrapper">
+            <input type="text" class="input modal-input" placeholder="Ваше имя" formControlName="name"
+            [style.border-color]="orderForm.get('name')?.invalid && (orderForm.get('name')?.touched || orderForm.get('name')?.dirty) ? '#ff3232' : ''">
+            <p class="input-error" *ngIf="orderForm.get('name')?.invalid && (orderForm.get('name')?.touched || orderForm.get('name')?.dirty)">Заполните ваше имя</p>
+          </div>
+          <div class="input-wrapper">
+            <input type="text" class="input modal-input" [mask]="'+0 (000) 000-00-00'" placeholder="Ваш номер телефона" formControlName="phone"
+                   [style.border-color]="orderForm.get('phone')?.invalid && (orderForm.get('phone')?.touched || orderForm.get('phone')?.dirty) ? '#ff3232' : ''">
+            <p class="input-error" *ngIf="orderForm.get('phone')?.invalid && (orderForm.get('phone')?.touched || orderForm.get('phone')?.dirty)">Заполните ваш номер телефона</p>
+          </div>
+          <button class="button button-big" [disabled]="orderForm.invalid" (click)="sendForm()">Оставить заявку</button>
+          <p class="input-error" *ngIf="requestError">
+            Произошла ошибка при отправке формы, попробуйте еще раз.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--(keydown)="onKeyDown($event)"-->

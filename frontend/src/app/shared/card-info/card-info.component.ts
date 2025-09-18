@@ -1,7 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ArticleType} from "../../../types/articles.type";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ArticleCardType} from "../../../types/articles.type";
 import {environment} from "../../../environments/environment";
 import {ServicesType} from "../../../types/services.type";
+import {ModalService} from "../services/modal.service";
+import {ModalConstants} from "../../../constants/modal.constants";
 
 @Component({
   selector: 'card-info-component',
@@ -11,7 +13,7 @@ import {ServicesType} from "../../../types/services.type";
 export class CardInfoComponent implements OnInit {
 
   @Input() isArticle: boolean = true;
-  @Input() articleItem: ArticleType = {
+  @Input() articleItem: ArticleCardType = {
     id: '',
     title: '',
     description: '',
@@ -30,17 +32,21 @@ export class CardInfoComponent implements OnInit {
   }
 
   staticPath: string = environment.staticApi;
+  orderType = ModalConstants.order
 
-  constructor() { }
+  @Output() selectType: EventEmitter<string> = new EventEmitter<string>();
+
+  constructor(private modalService: ModalService,) { }
 
   ngOnInit(): void {
-   if (this.isArticle) {
-     this.staticPath = environment.staticApi;
-   } else {
-     this.staticPath = 'assets/images/main-page/';
-   }
+   this.staticPath = this.isArticle
+     ? environment.staticApi
+     : 'assets/images/main-page/';
   }
 
-
+  setModalType(): void {
+    this.modalService.setModalType(this.orderType);
+    this.selectType.emit(this.serviceItem.type);
+  }
 
 }

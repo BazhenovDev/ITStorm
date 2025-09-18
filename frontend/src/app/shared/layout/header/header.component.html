@@ -20,21 +20,21 @@
 
     <nav class="header-navigate navigate" aria-label="Главная навигация сайта">
       <ul class="header-navigate-items navigate-items">
-        <li class="header-navigate-item navigate-item">
-          <a href="#" class="header-navigate-item-link navigate-item-link">Услуги</a>
+        <li class="header-navigate-item navigate-item" *ngFor="let item of menuItems">
+          <a routerLink="{{item.link}}" [fragment]="item.fragment ?? item.fragment" [ngClass]="{active: item.isActive}" class="header-navigate-item-link navigate-item-link">{{item.name}}</a>
         </li>
-        <li class="header-navigate-item">
-          <a href="#" class="header-navigate-item-link navigate-item-link">О нас</a>
-        </li>
-        <li class="header-navigate-item">
-          <a href="#" class="header-navigate-item-link navigate-item-link active">Статьи</a>
-        </li>
-        <li class="header-navigate-item">
-          <a href="#" class="header-navigate-item-link navigate-item-link">Отзывы</a>
-        </li>
-        <li class="header-navigate-item">
-          <a href="#" class="header-navigate-item-link navigate-item-link">Контакты</a>
-        </li>
+<!--        <li class="header-navigate-item">-->
+<!--          <a routerLink="/" fragment="about" class="header-navigate-item-link navigate-item-link">О нас</a>-->
+<!--        </li>-->
+<!--        <li class="header-navigate-item">-->
+<!--          <a routerLink="articles" class="header-navigate-item-link navigate-item-link">Статьи</a>-->
+<!--        </li>-->
+<!--        <li class="header-navigate-item">-->
+<!--          <a routerLink="/" fragment="reviews" class="header-navigate-item-link navigate-item-link">Отзывы</a>-->
+<!--        </li>-->
+<!--        <li class="header-navigate-item">-->
+<!--          <a routerLink="/" fragment="contacts" class="header-navigate-item-link navigate-item-link">Контакты</a>-->
+<!--        </li>-->
       </ul>
     </nav>
 

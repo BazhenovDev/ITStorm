@@ -1,24 +1,24 @@
 <section class="main">
   <div class="container">
 
-    <owl-carousel-component *ngIf="!showCustomSlider" [sliders]="mainSlider"></owl-carousel-component>
-    <custom-slider-component *ngIf="showCustomSlider" [sliders]="mainSlider"></custom-slider-component>
+    <owl-carousel-component *ngIf="!showCustomSlider" [sliders]="mainSlider" (selectType)="saveType($event)"></owl-carousel-component>
+    <custom-slider-component *ngIf="showCustomSlider" [sliders]="mainSlider" (selectType)="saveType($event)"></custom-slider-component>
 
   </div>
 </section>
 
-<section class="services">
+<section class="services" id="services">
   <div class="container">
     <h2 class="services-title">Услуги, которые мы предлагаем</h2>
     <div class="services-cards">
-      <article *ngFor="let service of services">
-        <card-info-component [isArticle]="false" [serviceItem]="service"></card-info-component>
+      <article *ngFor="let service of servicesItems">
+        <card-info-component [isArticle]="false" [serviceItem]="service" (selectType)="saveType($event)"></card-info-component>
       </article>
     </div>
   </div>
 </section>
 
-<section class="about">
+<section class="about" id="about">
   <div class="container">
     <div class="about-image">
       <img src="assets/images/main-page/about.png" alt="Команда АйтиШторм">
@@ -81,7 +81,7 @@
       </article>
     </div>
     <div class="articles-actions">
-      <a href="#" class="articles-actions-link">
+      <a routerLink="articles" class="articles-actions-link">
         <span>Перейти в блог</span>
         <svg width="8" height="14" viewBox="0 0 8 14" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -93,11 +93,11 @@
   </div>
 </section>
 
-<section class="reviews">
+<section class="reviews" id="reviews">
   <div class="container">
     <h2 class="reviews-title">Отзывы о нашей работе</h2>
     <div class="reviews-sliders">
-      <owl-carousel-o [options]="customOptions" #owlReviews>
+      <owl-carousel-o *ngIf="reviewsSlider.length > 0" [options]="customOptions" #owlReviews>
         <ng-template carouselSlide *ngFor="let review of reviewsSlider">
           <article class="reviews-slider">
             <div class="reviews-slider-head">
@@ -114,7 +114,7 @@
       </owl-carousel-o>
 
       <div class="reviews-nav">
-        <button class="reviews-button reviews-prev" (click)="owlReviews.prev()" aria-label="Предыдущий отзыв">
+        <button class="reviews-button reviews-prev" (click)="prevReview()" aria-label="Предыдущий отзыв">
           <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg"
                xmlns:xlink="http://www.w3.org/1999/xlink">
             <rect x="10" width="18.6667" height="10" transform="rotate(90 10 0)" fill="url(#pattern0_40_554)"/>
@@ -127,7 +127,7 @@
             </defs>
           </svg>
         </button>
-        <button class="reviews-button reviews-next" (click)="owlReviews.next()" aria-label="Следующий отзыв">
+        <button class="reviews-button reviews-next" (click)="nextReview()" aria-label="Следующий отзыв">
           <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg"
                xmlns:xlink="http://www.w3.org/1999/xlink">
             <rect y="19" width="18.6667" height="10" transform="rotate(-90 0 19)" fill="url(#pattern0_40_553)"/>
@@ -146,7 +146,7 @@
   </div>
 </section>
 
-<section class="contacts">
+<section class="contacts" id="contacts">
   <div class="container">
     <div class="contacts-map">
       <iframe
@@ -176,7 +176,7 @@
       <div class="contacts-social contacts-item">
         <h4 class="contacts-item-title">Мы в социальных сетях</h4>
         <div class="contacts-social-items">
-          <a href="" class="contacts-social-item">
+          <a href="{{vkLink}}" target="_blank" class="contacts-social-item">
             <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#clip0_14_131)">
                 <path
@@ -190,7 +190,7 @@
               </defs>
             </svg>
           </a>
-          <a href="" class="contacts-social-item">
+          <a href="{{facebookLink}}" target="_blank" class="contacts-social-item">
             <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#clip0_14_135)">
                 <path
@@ -205,7 +205,7 @@
             </svg>
 
           </a>
-          <a href="" class="contacts-social-item">
+          <a href="{{instagramLink}}" target="_blank" class="contacts-social-item">
             <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#clip0_14_133)">
                 <path
@@ -224,3 +224,5 @@
     </div>
   </div>
 </section>
+
+

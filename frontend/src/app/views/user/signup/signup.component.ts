@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {AuthService} from "../../../core/auth/auth.service";
 import {DefaultResponseType} from "../../../../types/default-response.type";
@@ -6,13 +6,14 @@ import {LoginResponseType} from "../../../../types/login-response.type";
 import {Router} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'signup-component',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, OnDestroy {
 
   public showPassword: boolean = false;
 
@@ -45,6 +46,8 @@ export class SignupComponent implements OnInit {
               private _matSnackBar: MatSnackBar,) {
   }
 
+  private subscription: Subscription = new Subscription();
+
   ngOnInit(): void {
   }
 
@@ -64,7 +67,7 @@ export class SignupComponent implements OnInit {
       && this.signupForm.value.password
       && this.signupForm.value.agree) {
       const signupFormValue = this.signupForm.value;
-      this.authService.signup(signupFormValue.name || '', signupFormValue.email || '', signupFormValue.password || '')
+      const signupSub = this.authService.signup(signupFormValue.name || '', signupFormValue.email || '', signupFormValue.password || '')
         .subscribe({
           next: (data: DefaultResponseType | LoginResponseType) => {
             let errorResponse: DefaultResponseType | null = null;
@@ -80,9 +83,9 @@ export class SignupComponent implements OnInit {
             }
 
             if ((data as LoginResponseType)
-            && (data as LoginResponseType).accessToken
-            && (data as LoginResponseType).refreshToken
-            && (data as LoginResponseType).userId) {
+              && (data as LoginResponseType).accessToken
+              && (data as LoginResponseType).refreshToken
+              && (data as LoginResponseType).userId) {
               loginResponse = data as LoginResponseType;
 
               this.authService.setTokens(loginResponse.accessToken, loginResponse.refreshToken);
@@ -98,6 +101,11 @@ export class SignupComponent implements OnInit {
             }
           },
         })
+      this.subscription.add(signupSub);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

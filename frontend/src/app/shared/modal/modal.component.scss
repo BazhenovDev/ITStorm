@@ -1,0 +1,87 @@
+@import "../../../assets/styles/shared/variables";
+@import "../../../assets/styles/mixins/mixins";
+
+.modal {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  opacity: 0;
+  transition: all 0.25s ease;
+  display: grid;
+  place-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  &-wrapper {
+    background-color: $main-bg-color;
+    border: 1px solid #709FDC;
+    border-radius: 10px;
+    position: relative;
+    width: 727px;
+  }
+  &-close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all .5s ease;
+    svg line {
+      transition: all .3s ease;
+    }
+    &:hover {
+      transform: scale(1.1) rotate(180deg);
+      svg line {
+        stroke: black;
+      }
+    }
+  }
+  &-title {
+    @include title-lora-38;
+    color: $main-title-color;
+    margin-bottom: 20px;
+  }
+  &-thanks {
+    padding: 163px 141px;
+    text-align: center;
+    &-text {
+      font-weight: 500;
+      color: $second-text-color;
+      margin-bottom: 40px;
+    }
+  }
+
+  &-consult {
+    padding: 95px 152px;
+    text-align: center;
+    &-content {
+      width: 422px;
+    }
+  }
+  &-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .input-wrapper {
+    margin-bottom: 5px;
+    &:last-of-type {
+      margin-bottom: 20px;
+    }
+  }
+  &-select {
+    margin-bottom: 5px;
+    color: $main-title-color;
+  }
+  &.active {
+    z-index: 10;
+    opacity: 1;
+  }
+  .input {
+    &-error {
+      padding: 5px;
+      color: #ff3232;
+    }
+  }
+}

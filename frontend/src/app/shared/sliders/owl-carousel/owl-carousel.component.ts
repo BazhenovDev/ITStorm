@@ -1,6 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {OwlOptions} from "ngx-owl-carousel-o";
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {OwlOptions, CarouselComponent} from "ngx-owl-carousel-o";
 import {SliderType} from "../../../../types/slider.type";
+import {ModalService} from "../../services/modal.service";
+import {ModalConstants} from "../../../../constants/modal.constants";
 
 @Component({
   selector: 'owl-carousel-component',
@@ -10,8 +12,13 @@ import {SliderType} from "../../../../types/slider.type";
 export class OwlCarouselComponent implements OnInit {
 
   @Input() sliders: SliderType[] = [];
+  @Output() selectType: EventEmitter<string> = new EventEmitter<string>();
+  modalType: string = ModalConstants.order;
+  currentSlideIndex: number = 0;
 
-  constructor() { }
+  @ViewChild('owlCar') owlCar!: CarouselComponent;
+
+  constructor(private modalService: ModalService,) { }
 
   ngOnInit(): void {
   }
@@ -22,6 +29,7 @@ export class OwlCarouselComponent implements OnInit {
     touchDrag: true,
     pullDrag: true,
     dots: false,
+    autoplay: true,
     navSpeed: 700,
     navText: ['', ''],
     responsive: {
@@ -32,6 +40,13 @@ export class OwlCarouselComponent implements OnInit {
     nav: false
   }
 
+  setCurrentIndex(event: any) {
+    this.currentSlideIndex = event.startPosition;
+  }
 
+  setModalType(): void {
+    this.modalService.setModalType(this.modalType);
+    this.selectType.emit(this.sliders[this.currentSlideIndex].type);
+  }
 
 }

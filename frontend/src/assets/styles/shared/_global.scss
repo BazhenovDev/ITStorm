@@ -56,6 +56,7 @@ a {
 }
 
 .button {
+  font-family: "Montserrat", sans-serif;
   background-color: $main-btn-color;
   color: $second-title-color;
   border: 0;
@@ -69,8 +70,15 @@ a {
     font-size: 12px;
     font-weight: 500;
   }
+  &-big {
+    padding: 15px 91px;
+  }
   &:hover {
     background-color: $hover-btn-color;
+  }
+  &:disabled {
+    cursor: not-allowed;
+    background-color: $disabled-btn-color;
   }
 }
 
@@ -115,5 +123,40 @@ a {
   }
   &-button-wrapper {
     color: $main-btn-color;
+  }
+}
+
+// Для статей внутри компонента article
+.article {
+  &-body {
+    margin-bottom: 60px;
+    h1, h2, h3, h4, h5 {
+      font-weight: 500;
+      font-size: 20px;
+      color: $main-title-color;
+      margin-bottom: 20px;
+    }
+    p, ul, ol {
+      margin-bottom: 20px;
+      line-height: 130%;
+    }
+    ul li {
+      list-style: circle;
+    }
+
+    ol li, ul li {
+      margin-left: 20px;
+    }
+  }
+}
+
+.not-found {
+  p {
+    font-size: 20px;
+    font-weight: 500;
+    a {
+      color: $main-link-active-color;
+      text-decoration: underline;
+    }
   }
 }

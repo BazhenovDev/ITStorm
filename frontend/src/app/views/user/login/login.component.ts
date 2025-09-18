@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "../../../core/auth/auth.service";
 import {FormBuilder, Validators} from "@angular/forms";
 import {DefaultResponseType} from "../../../../types/default-response.type";
@@ -6,13 +6,14 @@ import {LoginResponseType} from "../../../../types/login-response.type";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'login-component',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   showPassword: boolean = false;
 
@@ -36,17 +37,20 @@ export class LoginComponent implements OnInit {
               private _matSnackBar: MatSnackBar,) {
   }
 
+  private subscription: Subscription = new Subscription();
+
   ngOnInit(): void {
   }
 
   sendForm() {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
+      return;
     }
 
     const loginFormValue = this.loginForm.value;
     if (loginFormValue && loginFormValue.email && loginFormValue.password) {
-      this.authService.login(loginFormValue.email, loginFormValue.password, !!loginFormValue.rememberMe)
+      const loginSub = this.authService.login(loginFormValue.email, loginFormValue.password, !!loginFormValue.rememberMe)
         .subscribe({
           next: (data: DefaultResponseType | LoginResponseType) => {
 
@@ -81,10 +85,16 @@ export class LoginComponent implements OnInit {
             }
           }
         })
+
+      this.subscription.add(loginSub)
     }
   }
 
   closePassword() {
     this.showPassword = !this.showPassword;
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

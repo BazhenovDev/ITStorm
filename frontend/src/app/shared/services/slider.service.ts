@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {SliderType} from "../../../types/slider.type";
 import {ReviewType} from "../../../types/review.type";
+import {ServicesConstantsType} from "../../../constants/services.constants";
 
 @Injectable({
   providedIn: 'root'
@@ -12,18 +13,21 @@ export class SliderService {
       image: 'slider1.png',
       pretitle: 'Предложение месяца',
       title: 'Продвижение в Instagram для вашего бизнеса <span>-15%</span>!',
+      type: ServicesConstantsType.seo
     },
     {
       image: 'slider2.png',
       pretitle: 'Акция',
       title: 'Нужен грамотный <span>копирайтер</span>?',
-      description: 'Весь декабрь у нас действует акция на работу копирайтера.'
+      description: 'Весь декабрь у нас действует акция на работу копирайтера.',
+      type: ServicesConstantsType.copywriting
     },
     {
       image: 'slider3.png',
       pretitle: 'Новость дня',
       title: '<span>6 место</span> в ТОП-10 SMM-агенств Москвы!',
-      description: 'Мы благодарим каждого, кто голосовал за нас!'
+      description: 'Мы благодарим каждого, кто голосовал за нас!',
+      type: ServicesConstantsType.promotion
     },
   ];
 

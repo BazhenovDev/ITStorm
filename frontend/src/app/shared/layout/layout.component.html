@@ -1,7 +1,8 @@
 <main>
 <header-component [userInfo]="userInfo"></header-component>
-  <section class="content">
-    <router-outlet></router-outlet>
+  <section class="content" >
+    <router-outlet (activate)="onActivate($event)"></router-outlet>
   </section>
 <footer-component></footer-component>
 </main>
+<modal-component [currentSelectType]="currentSelectType" [userInfo]="userInfo"></modal-component>

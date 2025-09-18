@@ -28,15 +28,15 @@
 
     </button>
   </div>
-  <owl-carousel-o [options]="customOptions" #owlCar>
+  <owl-carousel-o [options]="customOptions" #owlCar (translated)="setCurrentIndex($event)">
     <ng-template carouselSlide *ngFor="let slider of sliders">
       <figure class="slider-wrapper">
         <figcaption class="slider-content">
-          <h2 class="slider-pretitle">{{slider.pretitle}}</h2>
+          <h2 class="slider-pretitle">{{ slider.pretitle }}</h2>
           <h2 class="slider-title" [class.mb20]="slider.description" [innerHTML]="slider.title">
           </h2>
-          <p class="slider-description"  *ngIf="slider.description">{{slider.description}}</p>
-          <a href="#" class="slider-button button">Подробнее</a>
+          <p class="slider-description" *ngIf="slider.description">{{ slider.description }}</p>
+          <button class="slider-button button" (click)="setModalType()">Подробнее</button>
         </figcaption>
         <img class="slider-image" src="assets/images/slider/{{slider.image}}" alt="Slider image">
       </figure>

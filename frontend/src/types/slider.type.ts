@@ -3,4 +3,5 @@ export type SliderType = {
   pretitle: string,
   title: string,
   description?: string,
+  type: string,
 }

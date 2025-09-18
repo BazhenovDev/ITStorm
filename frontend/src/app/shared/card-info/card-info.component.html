@@ -1,4 +1,4 @@
-<figure class="card">
+<figure class="card" *ngIf="articleItem || serviceItem">
   <span class="card-tag" *ngIf="isArticle">{{articleItem.category}}</span>
   <div class="card-image-wrapper">
     <img src="{{staticPath}}{{isArticle ? articleItem.image : serviceItem.image}}" alt="1" class="card-image">
@@ -9,10 +9,10 @@
   </figcaption>
   <div class="card-actions" *ngIf="!isArticle">
     <p class="card-price">От {{serviceItem.price}}₽</p>
-    <button class="button" data-type="{{serviceItem.type}}">Подробнее</button>
+    <button class="button" data-type="{{serviceItem.type}}" (click)="setModalType()">Подробнее</button>
   </div>
   <div class="card-actions" *ngIf="isArticle">
-    <a href="" class="card-link">Читать дальше</a>
+    <a routerLink="/articles/{{articleItem.url}}" class="card-link">Читать дальше</a>
   </div>
 </figure>
 

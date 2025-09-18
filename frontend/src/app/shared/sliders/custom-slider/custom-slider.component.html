@@ -30,7 +30,7 @@
     <h2 class="slider-title" [class.mb40]="!currentSlide.description" [innerHTML]="currentSlide.title"></h2>
     <p class="slider-description" *ngIf="currentSlide.description">{{currentSlide.description}}</p>
     <div class="slider-actions">
-      <a routerLink="/" class="button slider-button">Подробнее</a>
+      <button class="button slider-button" (click)="setModalType()">Подробнее</button>
     </div>
   </div>
 

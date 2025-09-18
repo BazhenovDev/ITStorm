@@ -1,0 +1,83 @@
+<section class="blog">
+  <div class="container">
+    <h1 class="blog-title">
+      Блог
+    </h1>
+    <div class="content" *ngIf="articles && currentPage <= pages.length">
+      <div class="blog-head">
+        <div class="blog-head-filters">
+          <div class="blog-head-filter" *ngFor="let category of filterParams">
+            <span>{{ category.name }}</span>
+            <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg"
+                 (click)="removeFilterCategory(category)">
+              <g clip-path="url(#clip0_20733_586)">
+                <line x1="1.93553" y1="3.15002" x2="13.9563" y2="15.1708" stroke="#709FDC" stroke-linecap="round"/>
+                <line x1="13.9236" y1="3.12984" x2="1.90278" y2="15.1507" stroke="#709FDC" stroke-linecap="round"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_20733_586">
+                  <rect width="16" height="16" fill="white" transform="translate(0 0.5)"/>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+        </div>
+
+        <div class="blog-head-sorting">
+          <div class="blog-head-sorting-head" (click)="clickOnFilter()" [class.active]="showFilter">
+            <span>Фильтр</span>
+            <svg width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M8.00002 7.50003C7.41668 7.50003 6.83335 7.27503 6.39168 6.83337L0.95835 1.40003C0.716683 1.15837 0.716683 0.758366 0.95835 0.516699C1.20002 0.275033 1.60002 0.275033 1.84168 0.516699L7.27502 5.95003C7.67502 6.35003 8.32502 6.35003 8.72502 5.95003L14.1583 0.516699C14.4 0.275033 14.8 0.275033 15.0417 0.516699C15.2833 0.758366 15.2833 1.15837 15.0417 1.40003L9.60835 6.83337C9.16668 7.27503 8.58335 7.50003 8.00002 7.50003Z"
+                fill="#071739"/>
+            </svg>
+          </div>
+          <ul class="blog-head-sorting-body" *ngIf="showFilter">
+            <li *ngFor="let category of categories" (click)="toggleSort(category)">
+              <span [class.active]="activeFilterClass(category.url)">{{ category.name }}</span>
+              <svg *ngIf="!activeFilterClass(category.url)" width="12" height="11" viewBox="0 0 12 11" fill="none"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.12 4.904H6.656V0.511999H5.144V4.904H0.68V6.32H5.144V10.688H6.656V6.32H11.12V4.904Z"
+                      fill="#BEBEBE"/>
+              </svg>
+              <svg *ngIf="activeFilterClass(category.url)" width="12" height="3" viewBox="0 0 7 3" fill="none"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.44 0.752H6.728V2.24H0.44V0.752Z" fill="#071739"/>
+              </svg>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="blog-body">
+        <article *ngFor="let article of articles?.items">
+          <card-info-component [isArticle]="true" [articleItem]="article"></card-info-component>
+        </article>
+      </div>
+
+      <div class="blog-pagination" *ngIf="pages.length > 1">
+        <div class="blog-pagination-arrow" (click)="updatePaginationButton(currentPage - 1)">
+          <img [ngClass]="currentPage === 1 ? 'blog-pagination-arrow-disabled' : ''"
+               [src]="currentPage === 1 ? 'assets/images/shared/prev-disabled.svg' : 'assets/images/shared/prev.svg'"
+               alt="Стрелка назад">
+        </div>
+
+        <div class="blog-pagination-pages">
+
+          <span class="blog-pagination-page" *ngFor="let page of pages" [class.active]="currentPage === page"
+                (click)="updatePaginationButton(page)">{{ page }}</span>
+        </div>
+
+        <div class="blog-pagination-arrow" (click)="updatePaginationButton(currentPage + 1)">
+          <img [ngClass]="currentPage === pages.length ? 'blog-pagination-arrow-disabled' : ''"
+               [src]="currentPage === pages.length ? 'assets/images/shared/next-disabled.svg' : 'assets/images/shared/next.svg'"
+               alt="Стрелка вперёд">
+        </div>
+      </div>
+
+    </div>
+    <div class="not-found" *ngIf="currentPage && currentPage > pages.length">
+      <p>Такой страницы не сущетсвует, вернитесь в <a routerLink="/articles">список статей</a>.</p>
+    </div>
+  </div>
+</section>

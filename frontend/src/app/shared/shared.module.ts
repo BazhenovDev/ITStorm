@@ -8,6 +8,10 @@ import {HttpClientModule} from "@angular/common/http";
 import { MinLengthPipe } from './pipes/min-length.pipe';
 import {CheckRegExpPipe} from "./pipes/check-regexp.pipe";
 import { CardInfoComponent } from './card-info/card-info.component';
+import { CommentComponent } from './comment/comment.component';
+import { ModalComponent } from './modal/modal.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {NgxMaskModule} from "ngx-mask";
 
 
 
@@ -18,19 +22,25 @@ import { CardInfoComponent } from './card-info/card-info.component';
     CheckRegExpPipe,
     MinLengthPipe,
     CardInfoComponent,
+    CommentComponent,
+    ModalComponent,
   ],
   imports: [
     CommonModule,
     CarouselModule,
+    ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    NgxMaskModule.forChild()
   ],
   exports: [
     OwlCarouselComponent,
     CustomSliderComponent,
     CheckRegExpPipe,
     MinLengthPipe,
-    CardInfoComponent
+    CardInfoComponent,
+    CommentComponent,
+    ModalComponent,
   ]
 })
 export class SharedModule { }
