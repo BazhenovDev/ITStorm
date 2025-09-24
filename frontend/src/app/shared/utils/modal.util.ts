@@ -4,9 +4,9 @@ export class ModalUtil {
   constructor() {
   }
 
-  static getTitle(type: string): string {
+  static getTitle(type: ServicesConstantsType | null | undefined): string {
 
-    let serviceTitle: string = 'Разработка';
+    let serviceTitle: string = ServicesConstantsTitle.development;
 
     switch (type) {
       case ServicesConstantsType.development:

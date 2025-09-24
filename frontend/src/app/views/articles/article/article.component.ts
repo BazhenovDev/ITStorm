@@ -9,6 +9,7 @@ import {CommentsService} from "../../../shared/services/comments.service";
 import {DefaultResponseType} from "../../../../types/default-response.type";
 import {ActionsCommentsType, AllCommentTypes} from "../../../../types/comment.type";
 import {Subscription} from "rxjs";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'article-component',
@@ -45,7 +46,8 @@ export class ArticleComponent implements OnInit, OnDestroy {
               private articlesService: ArticlesService,
               private authService: AuthService,
               private fb: FormBuilder,
-              private commentsService: CommentsService,) {
+              private commentsService: CommentsService,
+              private titleService: Title) {
   }
 
   private subscription: Subscription = new Subscription();
@@ -72,6 +74,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
               allCount: articleResponse.commentsCount,
               comments: articleResponse.comments
             }
+            this.titleService.setTitle(`ITStorm | Статья: ${articleResponse.title}`);
             this.currentCommentsLength = articleResponse.comments.length;
 
             this.currentPath = window.location.href;

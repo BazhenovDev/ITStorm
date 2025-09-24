@@ -4,8 +4,8 @@ import {BlogComponent} from "./blog/blog.component";
 import {ArticleComponent} from "./article/article.component";
 
 const routes: Routes = [
-  {path: 'articles', component: BlogComponent},
-  {path: 'articles/:url', component: ArticleComponent}
+  {path: 'articles', component: BlogComponent, title: 'ITStorm | Блог статей'},
+  {path: 'articles/:url', component: ArticleComponent, title: `ITStorm | Статья`}
 ];
 
 @NgModule({

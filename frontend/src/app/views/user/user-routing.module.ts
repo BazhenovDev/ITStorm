@@ -5,9 +5,9 @@ import {SignupComponent} from "./signup/signup.component";
 import {PrivacyComponent} from "./privacy/privacy.component";
 
 const routes: Routes = [
-  {path: 'login', component: LoginComponent},
-  {path: 'signup', component: SignupComponent},
-  {path: 'privacy', component: PrivacyComponent},
+  {path: 'login', component: LoginComponent, title: 'ITStorm | Авторизация'},
+  {path: 'signup', component: SignupComponent, title: 'ITStorm | Регистарция'},
+  {path: 'privacy', component: PrivacyComponent, title: 'ITStorm | Политика конфиденциальности'},
 ];
 
 @NgModule({

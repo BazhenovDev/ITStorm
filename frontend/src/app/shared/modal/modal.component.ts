@@ -42,7 +42,8 @@ export class ModalComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor(private modalService: ModalService,
               private servicesService: ServicesService,
-              private fb: FormBuilder,) { }
+              private fb: FormBuilder,) {
+  }
 
   private subscription: Subscription = new Subscription();
 
@@ -66,11 +67,11 @@ export class ModalComponent implements OnInit, OnChanges, OnDestroy {
   // А так же для установки имени, если пользователь залогинен
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['currentSelectType'] && this.currentSelectType) {
-      this.orderForm.patchValue({ service: this.currentSelectType });
+      this.orderForm.patchValue({service: this.currentSelectType});
     }
     if (this.userInfo && this.userInfo.name) {
-      this.orderForm.patchValue({ name: this.userInfo.name });
-      this.consultForm.patchValue({ name: this.userInfo.name });
+      this.orderForm.patchValue({name: this.userInfo.name});
+      this.consultForm.patchValue({name: this.userInfo.name});
     }
   }
 
@@ -91,7 +92,7 @@ export class ModalComponent implements OnInit, OnChanges, OnDestroy {
     if (this.type === 'consult') {
       if (this.consultForm.valid) {
         const consultFormValue = this.consultForm.value;
-        const formRequestSub =  this.modalService.sendFormRequest({
+        const formRequestSub = this.modalService.sendFormRequest({
           name: consultFormValue.name || '',
           phone: consultFormValue.phone.replace(/\D/g, '') || '',
           type: consultFormValue.type,

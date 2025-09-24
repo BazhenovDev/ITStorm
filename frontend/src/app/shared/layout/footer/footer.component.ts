@@ -13,12 +13,14 @@ export class FooterComponent implements OnInit {
   instagramLink: string = INSTAGRAM_LINK;
   vkLink: string = VK_LINK;
   facebookLink: string = FACEBOOK_LINK;
+  currentYear: number = 2025;
 
   modalType: string = ModalConstants.consult;
 
   constructor(private modalService: ModalService,) { }
 
   ngOnInit(): void {
+    this.currentYear = new Date().getFullYear();
   }
 
   setModalType(): void {
