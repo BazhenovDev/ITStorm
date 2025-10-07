@@ -10,7 +10,7 @@
 
             Введите ваше имя:
             <li *ngIf="!(name?.value | checkRegex: '^[А-Яа-яЁё\\s]+$')">На русском языке</li>
-            <li *ngIf="!(name?.value | checkRegex: '^[А-ЯЁ]$')">Каждое слово с заглавной буквы</li>
+            <li *ngIf="!(name?.value | checkRegex: '^[А-ЯЁ]$')">Каждое новое слово с заглавной буквы</li>
             <li *ngIf="!(name?.value | minLength: 2)">Минимум 2 символа</li>
           </ul>
         </div>
@@ -48,7 +48,7 @@
               *ngIf="password?.invalid && (password?.dirty || password?.touched)">
             Пароль должен состоять из:
             <li *ngIf="!(password?.value | checkRegex: '[A-ZА-ЯЁ]+')">Минимум одной буквы в верхнем регистре</li>
-            <li *ngIf="!(password?.value | checkRegex: '[0-9]+')">Минимум 1 цифре</li>
+            <li *ngIf="!(password?.value | checkRegex: '[0-9]+')">Минимум 1 цифры</li>
             <li *ngIf="!(password?.value | minLength: 8)">Минимум 8 символов</li>
           </ul>
         </div>
