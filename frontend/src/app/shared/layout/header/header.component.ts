@@ -53,7 +53,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         this.menuItems.forEach((item) => item.isActive = false);
-        const activeMenu = this.menuItems.find((menu) => menu.link.split('/')[1] === event.url.split('/')[1]);
+        const activeMenu = this.menuItems.find((menu) => {
+          return menu.link === event.url.split('?')[0] || menu.link.split('/')[1] === event.url.split('/')[1]
+        });
         if (activeMenu) {
           if (activeMenu.link === '/') return;
           activeMenu.isActive = true;
