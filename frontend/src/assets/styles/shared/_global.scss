@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
 }
 
 // Максимальную высоту задаю, чтобы в layout component прижать footer к низу
@@ -15,6 +16,10 @@ html, body {
   color: $main-text-color;
   background-color: $main-bg-color;
 }
+//
+//html {
+//  scroll-behavior: smooth;
+//}
 
 address {
   font-style: normal;

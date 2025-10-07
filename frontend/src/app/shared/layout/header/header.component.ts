@@ -4,9 +4,12 @@ import {UserInfoType} from "../../../../types/user-info.type";
 import {TokensType} from "../../../../types/tokens.type";
 import {DefaultResponseType} from "../../../../types/default-response.type";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {NavigationEnd, Router} from "@angular/router";
+import {NavigationStart, Router} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
-import {filter, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
+import {MenuItemType} from "../../../../types/menu-item.type";
+import {SmoothScrollService} from "../../services/smooth-scroll.service";
+import {ActiveMenuService} from "../../services/active-menu.service";
 
 @Component({
   selector: 'header-component',
@@ -19,29 +22,42 @@ export class HeaderComponent implements OnInit, OnDestroy {
   showMenu: boolean = false;
   @Input() userInfo: UserInfoType | null = null;
 
-  menuItems: { name: string, link: string, fragment?: string, isActive: boolean }[] = [
+  menuItems: MenuItemType[] = [
     {name: 'Услуги', link: '/', fragment: 'services', isActive: false},
     {name: 'О нас', link: '/', fragment: 'about', isActive: false},
     {name: 'Статьи', link: '/articles', isActive: false},
     {name: 'Отзывы', link: '/', fragment: 'reviews', isActive: false},
     {name: 'Контакты', link: '/', fragment: 'contacts', isActive: false},
-  ]
+  ];
 
   constructor(private authService: AuthService,
               private _matSnackBar: MatSnackBar,
-              private router: Router) {
+              private router: Router,
+              private smoothScrollService: SmoothScrollService,
+              private activeMenuService: ActiveMenuService,) {
   }
 
   private subscriptions: Subscription = new Subscription();
 
   ngOnInit(): void {
 
-    const currentPath = window.location.pathname;
+    const currentPath = window.location.pathname + window.location.hash;
     this.menuItems.forEach((item) => {
       const itemPath = item.fragment ? item.link + '#' + item.fragment : item.link;
       const active = currentPath.startsWith(itemPath);
       if (active) {
         item.isActive = true;
+      }
+    });
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.menuItems.forEach((item) => item.isActive = false);
+        const activeMenu = this.menuItems.find((menu) => menu.link.split('/')[1] === event.url.split('/')[1]);
+        if (activeMenu) {
+          if (activeMenu.link === '/') return;
+          activeMenu.isActive = true;
+        }
       }
     })
 
@@ -49,33 +65,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const isLoggedSub = this.authService.isLogged$
       .subscribe(isLogged => {
         this.isLogged = isLogged;
-      })
-    this.subscriptions.add(isLoggedSub)
+      });
+    this.subscriptions.add(isLoggedSub);
 
-    const routerEventsSub = this.router.events
-      .pipe(
-        filter(event => event instanceof NavigationEnd)
-      )
-      .subscribe(event => {
-        const navEnd = event as NavigationEnd;
-        this.menuItems.forEach(item => item.isActive = false);
-        if (navEnd && navEnd.url) {
-          const menuItem = this.menuItems.find(item => {
-            let link: string = '';
-            if (item.fragment) {
-              link = `${item.link}#${item.fragment}`;
-            } else {
-              link = `${item.link}`;
-            }
-            return navEnd.url.startsWith(link);
-          })
-          if (menuItem) {
-            menuItem.isActive = true;
+    const activeMenuServiceSub = this.activeMenuService.activeMenu$
+      .subscribe((fragment: string) => {
+        if (fragment) {
+          this.menuItems.forEach((item) => item.isActive = false);
+          const activeMenu = this.menuItems.find(item => item.fragment === fragment);
+          if (activeMenu) {
+            activeMenu.isActive = true;
           }
         }
-      });
 
-    this.subscriptions.add(routerEventsSub);
+      });
+    this.subscriptions.add(activeMenuServiceSub);
   }
 
   public toggleMenu(): void {
@@ -93,7 +97,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           error: (error: HttpErrorResponse) => {
             this.forcedLogout();
           }
-        })
+        });
     }
   }
 
@@ -113,15 +117,40 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  @HostListener('window:scroll', [])
-  clearFragment(): void {
-    if (window.scrollY < 150 && this.router.url.includes('#')) {
-      const url = this.router.url.split('#')[0] || '/';
-      this.menuItems.forEach(item => item.isActive = false);
-      if (window.scrollY <= 10) {
-        this.router.navigate([url]);
+  // @HostListener('window:scroll', [])
+  // clearFragment(): void {
+  //   const fragment = this.router.url;
+  //   console.log(fragment);
+  //   if (window.scrollY <= 150) {
+  //     // this.menuItems.forEach((item) => {item.isActive = false;});
+  //   }
+  // }
+
+  // @HostListener('window:scroll', [])
+  // clearFragment(): void {
+  //   if (window.scrollY <= 150 && this.router.url.includes('#')) {
+  //     const url = this.router.url.split('#')[0] || '/';
+  //     this.menuItems.forEach(item => item.isActive = false);
+  //     if (window.scrollY <= 10) {
+  //       this.router.navigate([url]);
+  //     }
+  //   }
+  // }
+
+  clickOnMenu(linkItem: MenuItemType): void {
+    const fragment: string | undefined = linkItem.fragment;
+    this.menuItems.forEach((item: MenuItemType) => item.isActive = false);
+    if (this.router.url.split('#')[0] === linkItem.link) {
+      this.smoothScrollService.scrollTo(linkItem);
+    } else {
+      this.router.navigate([linkItem.link]);
+      if (fragment) {
+        setTimeout(() => {
+          this.smoothScrollService.scrollTo(linkItem);
+        }, 10)
       }
     }
+    linkItem.isActive = true;
   }
 
   ngOnDestroy() {

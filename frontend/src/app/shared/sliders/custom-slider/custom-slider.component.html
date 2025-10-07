@@ -25,7 +25,7 @@
     </button>
   </div>
 
-  <div class="slider" style="background-image: url('assets/images/slider/{{currentSlide.image}}')">
+  <div class="slider" style="background-image: url('assets/images/slider/{{currentSlide.image}}')" [@fadeSlide]="toggleFadeSlide" (@fadeSlide.done)="onAnimationEnd()">
     <h3 class="slider-pretitle">{{currentSlide.pretitle}}</h3>
     <h2 class="slider-title" [class.mb40]="!currentSlide.description" [innerHTML]="currentSlide.title"></h2>
     <p class="slider-description" *ngIf="currentSlide.description">{{currentSlide.description}}</p>
@@ -33,7 +33,6 @@
       <button class="button slider-button" (click)="setModalType()">Подробнее</button>
     </div>
   </div>
-
 
   <div class="slider-dots" *ngIf="sliders">
     <div class="slider-dot" [class.active]="index === currentSlideIndex" *ngFor="let dot of sliders; let index=index" (click)="goToSlide(index)"></div>

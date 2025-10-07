@@ -257,6 +257,10 @@
       color: $main-text-color;
     }
   }
+  &-map {
+    border-radius: 10px;
+    overflow: hidden;
+  }
   &-social {
     &-items {
       max-width: 130px;

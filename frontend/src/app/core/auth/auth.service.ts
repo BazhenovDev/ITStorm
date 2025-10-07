@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Observable, Subject, throwError} from "rxjs";
+import {BehaviorSubject, Observable, throwError} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {LoginResponseType} from "../../../types/login-response.type";
 import {DefaultResponseType} from "../../../types/default-response.type";
@@ -13,21 +13,18 @@ import {UserInfoType} from "../../../types/user-info.type";
 })
 export class AuthService {
 
-  public isLogged$: Subject<boolean> = new Subject<boolean>();
-  private isLogged: boolean = false;
+  public isLogged$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(!!localStorage.getItem(ACCESS_TOKEN_KEY));
 
   constructor(private http: HttpClient) {
-    this.isLogged = !!localStorage.getItem(ACCESS_TOKEN_KEY);
   }
 
   public getIsLogged(): boolean {
-    return this.isLogged;
+    return this.isLogged$.value;
   }
 
   public setTokens(accessToken: string, refreshToken: string) {
     localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
     localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
-    this.isLogged = true;
     this.isLogged$.next(true);
   }
 
@@ -42,7 +39,6 @@ export class AuthService {
     localStorage.removeItem(ACCESS_TOKEN_KEY);
     localStorage.removeItem(REFRESH_TOKEN_KEY);
     localStorage.removeItem(USER_ID_KEY);
-    this.isLogged = false;
     this.isLogged$.next(false);
   }
 

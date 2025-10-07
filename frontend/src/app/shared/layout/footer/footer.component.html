@@ -14,21 +14,21 @@
 
       <nav class="footer-navigate navigate" aria-label="Навигация подвала сайта">
         <ul class="footer-navigate-items navigate-items">
-          <li class="footer-navigate-item navigate-item">
-            <a routerLink="/" fragment="services" class="footer-navigate-item-link navigate-item-link">Услуги</a>
+          <li class="footer-navigate-item navigate-item" *ngFor="let item of menuItems">
+            <a routerLink="{{item.link}}" (click)="clickOnMenu(item)" class="footer-navigate-item-link navigate-item-link">{{item.name}}</a>
           </li>
-          <li class="footer-navigate-item navigate-item">
-            <a routerLink="/" fragment="about" class="footer-navigate-item-link navigate-item-link">О нас</a>
-          </li>
-          <li class="footer-navigate-item navigate-item">
-            <a routerLink="articles" class="footer-navigate-item-link navigate-item-link">Статьи</a>
-          </li>
-          <li class="footer-navigate-item navigate-item">
-            <a routerLink="/" fragment="reviews" class="footer-navigate-item-link navigate-item-link">Отзывы</a>
-          </li>
-          <li class="footer-navigate-item navigate-item">
-            <a routerLink="/" fragment="contacts" class="footer-navigate-item-link navigate-item-link">Контакты</a>
-          </li>
+<!--          <li class="footer-navigate-item navigate-item">-->
+<!--            <a routerLink="/" fragment="about" class="footer-navigate-item-link navigate-item-link">О нас</a>-->
+<!--          </li>-->
+<!--          <li class="footer-navigate-item navigate-item">-->
+<!--            <a routerLink="articles" class="footer-navigate-item-link navigate-item-link">Статьи</a>-->
+<!--          </li>-->
+<!--          <li class="footer-navigate-item navigate-item">-->
+<!--            <a routerLink="/" fragment="reviews" class="footer-navigate-item-link navigate-item-link">Отзывы</a>-->
+<!--          </li>-->
+<!--          <li class="footer-navigate-item navigate-item">-->
+<!--            <a routerLink="/" fragment="contacts" class="footer-navigate-item-link navigate-item-link">Контакты</a>-->
+<!--          </li>-->
         </ul>
       </nav>
     </div>

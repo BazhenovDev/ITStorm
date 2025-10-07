@@ -49,4 +49,12 @@ export class CardInfoComponent implements OnInit {
     this.selectType.emit(this.serviceItem.type);
   }
 
+  sliceTitle(string: string): string {
+    let title = string;
+    if (string.length >= 80) {
+      title = string.substring(0, 77) + '...';
+    }
+    return title;
+  }
+
 }

@@ -2,11 +2,19 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {SliderType} from "../../../../types/slider.type";
 import {ModalService} from "../../services/modal.service";
 import {ModalConstants} from "../../../../constants/modal.constants";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'custom-slider-component',
   templateUrl: './custom-slider.component.html',
-  styleUrls: ['./custom-slider.component.scss']
+  styleUrls: ['./custom-slider.component.scss'],
+  animations: [
+    trigger('fadeSlide', [
+      state('show', style({opacity: 1})),
+      state('hide', style({opacity: 0.3})),
+      transition('* <=> *', animate('300ms linear')),
+    ])
+  ]
 })
 export class CustomSliderComponent implements OnInit, OnDestroy {
 
@@ -14,6 +22,7 @@ export class CustomSliderComponent implements OnInit, OnDestroy {
   @Output() selectType: EventEmitter<string> = new EventEmitter<string>();
   currentSlideIndex: number = 0;
   interval: number = 0;
+  toggleFadeSlide: string = 'show';
   currentSlide: SliderType = {
     image: '',
     pretitle: '',
@@ -34,35 +43,45 @@ export class CustomSliderComponent implements OnInit, OnDestroy {
   }
 
   goToNextSlide(): void {
-    this.currentSlideIndex++;
-    if (this.currentSlideIndex === this.sliders.length) {
-      this.currentSlideIndex = 0;
-      this.currentSlide = this.sliders[this.currentSlideIndex];
-    }
-    this.currentSlide = this.sliders[this.currentSlideIndex];
+    this.toggleFadeSlide = 'hide'
     clearInterval(this.interval);
-    this.startInterval();
+    setTimeout(() => {
+      this.currentSlideIndex++;
+      if (this.currentSlideIndex === this.sliders.length) {
+        this.currentSlideIndex = 0;
+        this.currentSlide = this.sliders[this.currentSlideIndex];
+      }
+      this.currentSlide = this.sliders[this.currentSlideIndex];
+
+      this.startInterval();
+    }, 300)
   }
 
   goToPrevSlide(): void {
-    this.currentSlideIndex--;
-    if (this.currentSlideIndex < 0) {
-      this.currentSlideIndex = this.sliders.length - 1;
-      this.currentSlide = this.sliders[this.currentSlideIndex];
-    }
-    this.currentSlide = this.sliders[this.currentSlideIndex];
+    this.toggleFadeSlide = 'hide'
     clearInterval(this.interval);
-    this.startInterval();
+    setTimeout(() => {
+      this.currentSlideIndex--;
+      if (this.currentSlideIndex < 0) {
+        this.currentSlideIndex = this.sliders.length - 1;
+        this.currentSlide = this.sliders[this.currentSlideIndex];
+      }
+      this.currentSlide = this.sliders[this.currentSlideIndex];
+      this.startInterval();
+    },300)
   }
 
   goToSlide(index: number): void {
-    this.currentSlideIndex = index;
-    this.currentSlide = this.sliders[this.currentSlideIndex];
+    this.toggleFadeSlide = 'hide'
     clearInterval(this.interval);
-    this.startInterval();
+    setTimeout(() => {
+      this.currentSlideIndex = index;
+      this.currentSlide = this.sliders[this.currentSlideIndex];
+      this.startInterval();
+    }, 300)
   }
 
-   setModalType(): void {
+  setModalType(): void {
     this.modalService.setModalType(this.modalType);
     this.selectType.emit(this.currentSlide.type);
   }
@@ -71,6 +90,10 @@ export class CustomSliderComponent implements OnInit, OnDestroy {
     this.interval = window.setInterval(() => {
       this.goToNextSlide();
     }, 5000)
+  }
+
+  onAnimationEnd(): void {
+    this.toggleFadeSlide = 'show';
   }
 
   ngOnDestroy(): void {

@@ -115,7 +115,7 @@ export class BlogComponent implements OnInit, OnDestroy {
       this.queryParams.categories = [];
       this.queryParams.categories = [filter.url];
     }
-
+    this.queryParams.page = 1;
     this.router.navigate(['/articles'], {queryParams: this.queryParams});
   }
 

@@ -4,7 +4,7 @@
     <img src="{{staticPath}}{{isArticle ? articleItem.image : serviceItem.image}}" alt="1" class="card-image">
   </div>
   <figcaption class="card-info">
-    <h3 class="card-title">{{isArticle ? articleItem.title : serviceItem.title}}</h3>
+    <h3 class="card-title">{{isArticle ? sliceTitle(articleItem.title) : sliceTitle(serviceItem.title)}}</h3>
     <p class="card-description">{{isArticle ? articleItem.description : serviceItem.description}}</p>
   </figcaption>
   <div class="card-actions" *ngIf="!isArticle">

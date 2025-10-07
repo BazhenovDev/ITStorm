@@ -39,6 +39,38 @@ export class CommentComponent implements OnInit, OnDestroy {
 
   clickOnReaction(reaction: string) {
 
+    const updateReactSub = this.commentsService.updateReaction(this.comment.id, {action: reaction})
+      .subscribe({
+        next: (response: DefaultResponseType) => {
+          this.updateReaction(reaction);
+          if (reaction === VIOLATE_REACTION && !response.error) {
+            this._snackBar.open('Жалоба отправлена', 'ОК');
+          } else if (this.userReaction?.action === reaction) {
+            this._snackBar.open('Реакция удалена', 'ОК');
+          } else if ((reaction === LIKE_REACTION || reaction === DISLIKE_REACTION) && !response.error) {
+            this._snackBar.open('Ваш голос учтён', 'ОК');
+          }
+          if (response && !response.error) {
+            this.commentsService.getActionForComments(this.comment.id)
+              .subscribe((actionComments: DefaultResponseType | ActionsCommentsType[]) => {
+                this.userReaction = (actionComments as ActionsCommentsType[])[0];
+              })
+          }
+        },
+        error: (errorResponse: HttpErrorResponse) => {
+          console.log(errorResponse.error);
+          if (errorResponse.error && errorResponse.error.message.toLowerCase() === 'это действие уже применено к комментарию') {
+            this._snackBar.open('Жалоба уже отправлена', 'ОК');
+          } else if (errorResponse.error && errorResponse.error.message.toLowerCase() === 'no auth token') {
+            this._snackBar.open('Для данного действия необходимо авторизоваться', 'ОК');
+          }
+        }
+      });
+
+    this.subscription.add(updateReactSub);
+  }
+
+  updateReaction(reaction: string) {
     if (this.userReaction) {
       if (this.userReaction.action === this.likeReactionKey && reaction === this.dislikeReactionKey) {
         this.comment.likesCount -= 1;
@@ -56,34 +88,6 @@ export class CommentComponent implements OnInit, OnDestroy {
     } else if (reaction === this.likeReactionKey) {
       this.comment.likesCount += 1;
     }
-
-    const updateReactSub = this.commentsService.updateReaction(this.comment.id, {action: reaction})
-      .subscribe({
-        next: (response: DefaultResponseType) => {
-          if (reaction === VIOLATE_REACTION && !response.error) {
-            this._snackBar.open('Жалоба отправлена', 'ОК');
-          } else if (this.userReaction?.action === reaction) {
-            this._snackBar.open('Реакция удалена', 'ОК');
-          } else if ((reaction === LIKE_REACTION || reaction === DISLIKE_REACTION) && !response.error) {
-            this._snackBar.open('Ваш голос учтён', 'ОК');
-          }
-          if (response && !response.error) {
-            this.commentsService.getActionForComments(this.comment.id)
-              .subscribe((actionComments: DefaultResponseType | ActionsCommentsType[]) => {
-                this.userReaction = (actionComments as ActionsCommentsType[])[0];
-              })
-          }
-        },
-        error: (errorResponse: HttpErrorResponse) => {
-          if (errorResponse.error && errorResponse.error.message.toLowerCase('это действие уже применено к комментарию')) {
-            this._snackBar.open('Жалоба уже отправлена', 'ОК');
-          } else if (errorResponse.error && errorResponse.error.message) {
-            this._snackBar.open(errorResponse.error.message);
-          }
-        }
-      });
-
-    this.subscription.add(updateReactSub);
   }
 
   ngOnDestroy(): void {

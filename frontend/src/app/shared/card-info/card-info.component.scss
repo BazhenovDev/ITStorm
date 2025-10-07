@@ -21,6 +21,8 @@
     &-wrapper {
       max-width: 291px;
       max-height: 291px;
+      min-width: 291px;
+      min-height: 291px;
       margin-bottom: 15px;
       border-radius: 5px;
       overflow: hidden;
@@ -37,6 +39,7 @@
     @include title-montserrat-20-medium;
     margin-bottom: 10px;
     color: $main-title-color;
+    overflow: hidden;
   }
   &-description {
     line-height: 130%;
