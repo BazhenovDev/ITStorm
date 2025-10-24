@@ -134,6 +134,12 @@ itstorm/
 
 ```
 
+## 📋 В планах:
+1. Сделать адаптивную вёрстку
+2. Внедрить unit-тесты
+3. Оптимизировать некоторый функционал
+4. Сделать миграцию с 14 версии на 20
+
 ## 📸 Скриншоты приложения
 
 <img width="1470" alt="" src="https://github.com/BazhenovDev/ITStorm/blob/main/frontend/src/assets/screenshots/1.png">
